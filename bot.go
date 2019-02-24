@@ -1,4 +1,4 @@
-package mytoptag_bot
+package main
 
 import (
 	"bytes"
