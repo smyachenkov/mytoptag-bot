@@ -50,7 +50,6 @@ func main() {
 	if err != nil {
 		log.Panic(err)
 	}
-	bot.Debug = true
 	u := tgbotapi.NewUpdate(0)
 	u.Timeout = 60
 	updates, err := bot.GetUpdatesChan(u)
