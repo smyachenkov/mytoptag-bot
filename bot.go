@@ -110,10 +110,11 @@ func processText(msg tgbotapi.Update) string {
 	var categories []string
 	var showCategories = false
 	for idx, e := range strings.Split(msg.Message.Text, " ") {
-		if idx == 0 && e == "showcategories" {
+		word := strings.ToLower(e)
+		if idx == 0 && word == "showcategories" {
 			showCategories = true
-		} else if len(e) > 2 {
-			categories = append(categories, e)
+		} else if len(word) > 2 {
+			categories = append(categories, word)
 		}
 		if idx > 9 {
 			break
