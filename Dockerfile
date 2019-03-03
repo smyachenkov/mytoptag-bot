@@ -1,7 +1,6 @@
-FROM golang:latest
-WORKDIR $GOPATH/src/github.com/flslkxtc/mytoptag-bot
-COPY . .
-RUN go get -d -v ./...
-RUN go install -v ./...
-EXPOSE 8080
-CMD ["mytoptag-bot"]
+FROM iron/go:dev
+WORKDIR /app
+ENV SRC_DIR=/go/src/github.com/flslkxtc/mytoptag-bot/
+ADD . $SRC_DIR
+RUN cd $SRC_DIR; go build -o myapp; cp myapp /app/
+ENTRYPOINT ["./myapp"]
