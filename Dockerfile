@@ -14,13 +14,5 @@ RUN go get -d -v
 # Build the binary.
 RUN go build -o /go/bin/hello
 
-############################
-# STEP 2 build a small image
-############################
-FROM scratch
-
-# Copy our static executable.
-COPY --from=builder /go/bin/mytoptag-bot /go/bin/mytoptag-bot
-
-# Run the hello binary.
+# Run the binary.
 ENTRYPOINT ["/go/bin/mytoptag-bot"]
