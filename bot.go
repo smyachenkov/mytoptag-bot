@@ -45,7 +45,7 @@ type Profiles struct {
 }
 
 func main() {
-	config = readConfig()
+	initConfig()
 	bot, err := tgbotapi.NewBotAPI(config.BotToken)
 	if err != nil {
 		log.Panic(err)
@@ -71,16 +71,10 @@ func main() {
 	}
 }
 
-func readConfig() Configuration {
-	file, _ := os.Open("config.json")
-	defer file.Close()
-	decoder := json.NewDecoder(file)
-	configuration := Configuration{}
-	err := decoder.Decode(&configuration)
-	if err != nil {
-		fmt.Println("error:", err)
-	}
-	return configuration
+func initConfig() {
+	config.MytoptagService = os.Getenv("MYTOPTAG_SERVICE")
+	config.BotToken = os.Getenv("BOT_API_TOKEN")
+	config.Admins = strings.Split(os.Getenv("BOT_ADMINS"), ",")
 }
 
 func userIsAdmin(username string) bool {
